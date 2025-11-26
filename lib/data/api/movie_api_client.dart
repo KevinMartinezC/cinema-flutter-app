@@ -14,7 +14,21 @@ class MovieApiClient {
       queryParameters: {'page': page},
       fromJson: MovieResult.fromJson,
     );
-    return response.data
+    return _mapToMovies(response.data);
+  }
+
+  Future<List<Movie>> getPopularMoview({int page = 1}) async {
+    final response = await _httpHelper.getList<MovieResult>(
+      '/movie/popular',
+      queryParameters: {'page': page},
+      fromJson: MovieResult.fromJson,
+    );
+    return _mapToMovies(response.data);
+  }
+
+ 
+  List<Movie> _mapToMovies(List<MovieResult> movieResults) {
+    return movieResults
         .where((moviedb) => moviedb.posterPath != 'no-poster')
         .map(MovieMapper.movieDbToDomainModel)
         .toList();
