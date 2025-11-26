@@ -30,10 +30,10 @@ class MovieHorizontalListView extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-               return _Slide(movie: movies[index]);
+                return _Slide(movie: movies[index]);
               },
-              )
-            )
+            ),
+          ),
         ],
       ),
     );
@@ -48,46 +48,84 @@ class _Slide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Image
-          SizedBox(
-            width: 150,
-            height: 225,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                movie.posterPath,
-                fit: BoxFit.cover,
-                width: 150,
-                height: 225,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress != null) {
-                    return const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                      ),
-                    );
-                  }
-                  return FadeIn(child: child);
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              movie.posterPath,
+              fit: BoxFit.cover,
+              width: 150,
+              height: 225,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress != null) {
+                  return const SizedBox(
                     width: 150,
                     height: 225,
-                    color: Colors.grey[300],
-                    child: const Icon(Icons.broken_image),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
                   );
-                },
+                }
+                return FadeIn(child: child);
+              },
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  width: 150,
+                  height: 225,
+                  color: Colors.grey[300],
+                  child: const Icon(Icons.broken_image),
+                );
+              },
+            ),
+          ),
+
+          // Title with top padding
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: SizedBox(
+              width: 150,
+              child: Text(
+                movie.title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: textStyle.titleSmall,
               ),
             ),
           ),
 
-          //Title
+          // Rating 
+          Container(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.star_half_outlined, color: Colors.yellow.shade800),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 3),
+                  margin: const EdgeInsets.only(right: 7),
+                  child: Text(
+                    '${movie.voteAverage}',
+                    style: textStyle.bodyMedium?.copyWith(
+                      color: Colors.yellow.shade800,
+                    ),
+                  ),
+                ),
+                Text(
+                  '${movie.popularity}',
+                  style: textStyle.bodySmall,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
