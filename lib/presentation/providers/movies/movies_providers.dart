@@ -3,16 +3,20 @@ import 'package:cinema_app/presentation/providers/movies/movies_repository_provi
 import 'package:flutter_riverpod/legacy.dart';
 
 //Notify when change the state
-final nowPlayingMoviesProvider =
-    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
       final fetchMoreMovies = ref.watch(movieRepositoryProvider).getNowPlaying;
 
       return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
     });
 
-    final popularMoviesProvider =
-    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+final popularMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
       final fetchMoreMovies = ref.watch(movieRepositoryProvider).getPopulars;
+
+      return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+    });
+
+final upcomingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+      final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcomingMovies;
 
       return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
     });
