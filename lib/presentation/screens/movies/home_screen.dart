@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Center(child: _HomeView()),
       bottomNavigationBar: CustomBottomNavigation(),
-      );
+    );
   }
 }
 
@@ -34,20 +34,31 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
-    return Column(
-      children: [
-        CustomAppBar(),
+    return CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          floating: true,
+          flexibleSpace: FlexibleSpaceBar(title: CustomAppBar()),
+        ),
 
-        MoviesSlideShow(movies: slideShowMovies),
+        SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            return Column(
+              children: [
+                MoviesSlideShow(movies: slideShowMovies),
 
-        MovieHorizontalListView(
-          movies: nowPlayingMovies,
-          title: 'Now in Theaters',
-          subTitle: "Monday 20",
-          loadNextPage: () {
-           ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
-          },
-          )
+                MovieHorizontalListView(
+                  movies: nowPlayingMovies,
+                  title: 'Now in Theaters',
+                  subTitle: "Monday 20",
+                  loadNextPage: () {
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                  },
+                ),
+              ],
+            );
+          }, childCount: 1),
+        ),
       ],
     );
   }
