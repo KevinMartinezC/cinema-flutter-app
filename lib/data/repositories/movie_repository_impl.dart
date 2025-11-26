@@ -19,6 +19,11 @@ class MovieRepositoryImpl extends MovieRepository {
   
   @override
   Future<List<Movie>> getUpcomingMovies({int page = 1}) {
-    return apiClient.getUpcomingMovies();
+    return apiClient.getUpcomingMovies(page: page);
+  }
+  
+  @override
+  Future<List<Movie>> getTopRatedMovies({int page = 1}) {
+    return apiClient.getTopRatedMovies(page: page);
   }
 }
