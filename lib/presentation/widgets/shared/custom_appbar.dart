@@ -9,16 +9,18 @@ class CustomAppBar extends StatelessWidget {
     final titleStye = Theme.of(context).textTheme.titleMedium;
     return SafeArea(
       bottom: false, //to remove big bottom padding
+      top: true, // Ensure it starts from the top
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         child: SizedBox(
           width: double.infinity, //all the width available
           child: Row(
             children: [
               Icon(Icons.movie_outlined, color: colors.primary),
+              const SizedBox(width: 8),
               Text("Cinema", style: titleStye),
 
-              Spacer(),
+              const Spacer(),
 
               IconButton(onPressed: () {}, icon: Icon(Icons.search)),
             ],
