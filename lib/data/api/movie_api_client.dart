@@ -1,6 +1,7 @@
 import 'package:cinema_app/data/http/movie_db_client.dart';
 import 'package:cinema_app/data/mappers/movie_mapper.dart';
 import 'package:cinema_app/data/models/move_result.dart';
+import 'package:cinema_app/data/models/movie_datails.dart';
 import 'package:cinema_app/data/utils/http_helper.dart';
 import 'package:cinema_app/domain/models/movie.dart';
 
@@ -42,6 +43,18 @@ class MovieApiClient {
       fromJson: MovieResult.fromJson,
     );
     return _mapToMovies(response.data);
+  }
+
+  Future<Movie> getMovieById(String id) async {
+    final response = await _httpHelper.dio.get('/movie/$id');
+
+    if (response.statusCode != 200) {
+      throw Exception('Movie with id: $id not found');
+    }
+
+    final movieDetails = MovieDetails.fromJson(response.data);
+    final Movie movie = MovieMapper.movieDetailsToDomainModel(movieDetails);
+    return movie;
   }
 
   List<Movie> _mapToMovies(List<MovieResult> movieResults) {

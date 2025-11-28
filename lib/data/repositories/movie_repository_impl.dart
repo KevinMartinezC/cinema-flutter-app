@@ -26,4 +26,9 @@ class MovieRepositoryImpl extends MovieRepository {
   Future<List<Movie>> getTopRatedMovies({int page = 1}) {
     return apiClient.getTopRatedMovies(page: page);
   }
+  
+  @override
+  Future<Movie> getMovieById(String id) {
+    return apiClient.getMovieById(id);
+  }
 }
