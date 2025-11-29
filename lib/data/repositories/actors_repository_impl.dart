@@ -12,5 +12,4 @@ class ActorsRepositoryImpl extends ActorsRepository {
   Future<List<Actor>> getActorsByMovieId(String movieId) {
     return apiClient.getActorsByMovieId(movieId);
   }
-  
 }

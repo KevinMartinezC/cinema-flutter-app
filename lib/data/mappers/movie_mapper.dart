@@ -1,4 +1,4 @@
-import 'package:cinema_app/data/models/move_result.dart';
+import 'package:cinema_app/data/models/movie_result.dart';
 import 'package:cinema_app/data/models/movie_datails.dart';
 import 'package:cinema_app/domain/models/movie.dart';
 
