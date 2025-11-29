@@ -31,4 +31,10 @@ class MovieRepositoryImpl extends MovieRepository {
   Future<Movie> getMovieById(String id) {
     return apiClient.getMovieById(id);
   }
+  
+  @override
+  Future<List<Movie>> searchMovies(String query) {
+    // TODO: implement searchMovies
+    throw UnimplementedError();
+  }
 }
