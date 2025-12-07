@@ -6,35 +6,34 @@ class MovieRepositoryImpl extends MovieRepository {
   final MovieApiClient apiClient;
 
   MovieRepositoryImpl({required this.apiClient});
-  
+
   @override
   Future<List<Movie>> getNowPlaying({int page = 1}) {
     return apiClient.getNowPlaying(page: page);
   }
-  
+
   @override
   Future<List<Movie>> getPopulars({int page = 1}) {
     return apiClient.getPopularMovies(page: page);
   }
-  
+
   @override
   Future<List<Movie>> getUpcomingMovies({int page = 1}) {
     return apiClient.getUpcomingMovies(page: page);
   }
-  
+
   @override
   Future<List<Movie>> getTopRatedMovies({int page = 1}) {
     return apiClient.getTopRatedMovies(page: page);
   }
-  
+
   @override
   Future<Movie> getMovieById(String id) {
     return apiClient.getMovieById(id);
   }
-  
+
   @override
   Future<List<Movie>> searchMovies(String query) {
-    // TODO: implement searchMovies
-    throw UnimplementedError();
+    return apiClient.searchMovies(query);
   }
 }
