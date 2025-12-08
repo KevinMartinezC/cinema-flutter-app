@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinema_app/config/helpers/humans_formats.dart';
 import 'package:cinema_app/domain/models/movie.dart';
+import 'package:cinema_app/presentation/widgets/shared/adaptive_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -103,9 +104,7 @@ class _Slide extends StatelessWidget {
                         child: SizedBox(
                           width: 30,
                           height: 30,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2.5,
-                          ),
+                          child: AdaptiveLoadingIndicator(),
                         ),
                       ),
                     );

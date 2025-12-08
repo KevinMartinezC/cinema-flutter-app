@@ -1,3 +1,4 @@
+import 'package:cinema_app/presentation/widgets/shared/adaptive_loading_indicator.dart';
 import 'package:flutter/material.dart';
 
 class FullScreenLoader extends StatelessWidget {
@@ -11,7 +12,7 @@ class FullScreenLoader extends StatelessWidget {
         children: [
           const Text("Loading movies..."),
           const SizedBox(height: 10),
-          const CircularProgressIndicator(strokeWidth: 2)
+          const AdaptiveLoadingIndicator()
         ],
       ),
     );

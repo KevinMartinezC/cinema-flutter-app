@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cinema_app/domain/models/movie.dart';
 import 'package:cinema_app/presentation/providers/actors/actors_by_movieId_provider.dart';
 import 'package:cinema_app/presentation/providers/movies/movie_info_provider.dart';
+import 'package:cinema_app/presentation/widgets/shared/adaptive_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -134,7 +135,7 @@ class _ActorsByMovie extends ConsumerWidget {
     final actorsByMovie = ref.watch(actorsByMovieProvider);
 
     if (actorsByMovie[movieId] == null) {
-      return const CircularProgressIndicator(strokeWidth: 2);
+      return const AdaptiveLoadingIndicator();
     }
     final actors = actorsByMovie[movieId]!;
 
