@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinema_app/config/helpers/humans_formats.dart';
 import 'package:cinema_app/domain/models/movie.dart';
+import 'package:cinema_app/presentation/widgets/shared/adaptive_filled_button.dart';
 import 'package:cinema_app/presentation/widgets/shared/adaptive_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -47,10 +48,13 @@ class _MovieHorizontalListViewState extends State<MovieHorizontalListView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350,
+      height: 355,
       child: Column(
         children: [
           if (_hasTitle) _SectionHeader(title: widget.title, subTitle: widget.subTitle),
+          const SizedBox(
+            height: 12,
+          ),
 
           Expanded(
             child: ListView.builder(
@@ -186,11 +190,7 @@ class _SectionHeader extends StatelessWidget {
           const Spacer(),
 
           if (subTitle != null)
-            FilledButton.tonal(
-              style: ButtonStyle(visualDensity: VisualDensity.compact),
-              onPressed: () {},
-              child: Text(subTitle!),
-            ),
+          AdaptiveFilledButton(onPressed: () {}, label: subTitle!)
         ],
       ),
     );
