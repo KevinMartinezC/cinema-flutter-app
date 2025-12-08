@@ -1,5 +1,7 @@
+import 'package:cinema_app/config/helpers/platform_helper.dart';
 import 'package:cinema_app/presentation/delegates/search_movie_delegate.dart';
 import 'package:cinema_app/presentation/providers/movies/movies_repository_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,7 +21,12 @@ class CustomAppBar extends ConsumerWidget {
           width: double.infinity, //all the width available
           child: Row(
             children: [
-              Icon(Icons.movie_outlined, color: colors.primary),
+              Icon(
+                PlatformHelper.isIOS
+                    ? CupertinoIcons.film
+                    : Icons.movie_outlined,
+                color: colors.primary,
+              ),
               const SizedBox(width: 8),
               Text("Cinema", style: titleStye),
 
@@ -35,7 +42,9 @@ class CustomAppBar extends ConsumerWidget {
                     ),
                   );
                 },
-                icon: Icon(Icons.search),
+                icon: Icon(
+                  PlatformHelper.isIOS ? CupertinoIcons.search : Icons.search,
+                ),
               ),
             ],
           ),
